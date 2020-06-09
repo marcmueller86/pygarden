@@ -7,7 +7,9 @@ poller = MiFloraPoller('80:EA:CA:89:28:33', GatttoolBackend)
 
 start_round = time.time()
 
-now = datetime.utcnow()
+now_utc = datetime.utcnow()
+now = datetime.now()
+
 # poller.battery_level() #  – gibt den Batteristatus zurück.
 # poller.firmware_version() # – liefert die aktuelle Firmware Version als Text.
 sensor = {
@@ -17,10 +19,14 @@ sensor = {
     'moisture': None, 
     'conductivity': None, 
     'battery': None,
-    'ts': int(now.strftime("%s")), 
-    'date': now
+    'ts_utc': int(now.strftime("%s")), 
+    'date_utc': now_utc,
+    'date': now,
+    'firmware': None
     }
 
+
+sensor['firmware']=poller.firmware_version()
 start=time.time()
 # liefert den Temperaturwert (in Grad Celsius)
 sensor['temperature']=poller.parameter_value("temperature")
