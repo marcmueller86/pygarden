@@ -7,7 +7,7 @@ poller = MiFloraPoller('80:EA:CA:89:28:33', GatttoolBackend)
 
 start_round = time.time()
 
-now = datetime.datetime.utcnow()
+now = datetime.utcnow()
 # poller.battery_level() #  – gibt den Batteristatus zurück.
 # poller.firmware_version() # – liefert die aktuelle Firmware Version als Text.
 sensor = {
