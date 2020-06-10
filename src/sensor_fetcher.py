@@ -122,6 +122,7 @@ if __name__ == '__main__':
 
     """
     arguments = docopt(__doc__)
+    print (arguments)
     database_name = 'sensor_data'
     sensor_fetch = SensorFetcher(database_name)
     if '--init' in arguments:
