@@ -8,7 +8,6 @@ Options:
 '''
 
 from docopt import docopt
-import utils
 from miflora.miflora_poller import MiFloraPoller
 from btlewrap.gatttool import GatttoolBackend
 import time
@@ -104,11 +103,11 @@ class SensorFetcher(object):
         temp_sensor['name'] = sensor
         # liefert den Temperaturwert (in Grad Celsius)
         temp_sensor['temperature'] = poller.parameter_value("temperature")
-        # gibt die lichtstärke an
+        # gibt die lichtstaerke an
         temp_sensor['light'] = poller.parameter_value("light")
         # gibt die Feuchtigkeit an
         temp_sensor['moisture'] = poller.parameter_value("moisture")
-        # gibt die Leitfähigkeit des Bodens an.
+        # gibt die Leitfaehigkeit des Bodens an.
         temp_sensor['conductivity'] = poller.parameter_value("conductivity")
         temp_sensor['battery'] = poller.parameter_value("battery")
         temp_sensor['date_iso'] = now.replace(microsecond=0).isoformat()
