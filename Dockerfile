@@ -5,7 +5,7 @@ FROM arm32v7/python:latest
 COPY config ./
 COPY src ./
 RUN apt-get update
-RUN apt-get install python-pandas
+RUN apt-get install -y python-pandas
 RUN pip install docopt bluepy miflora btlewrap==0.0.8
 
 # Trigger Python script
