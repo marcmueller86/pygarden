@@ -31,7 +31,7 @@ class SensorFetcher(object):
     'conductivity': None, 
     'battery': None,
     'ts_utc': None, 
-    'date': None,
+    'date_iso': None,
     'firmware': None
     }
     engine = None
