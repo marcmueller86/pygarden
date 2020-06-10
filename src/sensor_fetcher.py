@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
+# encoding: utf-8
 '''Fetch miflora bluettooth sensor data
 Usage:
-    sensor_fetcher.py [--init] --database_name=<database_name> --database_type=<database_type>
+    sensor_fetcher.py [--init]
 Options:
-    --database_name <database_name>
-    --database_type <database_type>
+    --init
 '''
 
 from docopt import docopt
@@ -13,14 +13,10 @@ from miflora.miflora_poller import MiFloraPoller
 from btlewrap.gatttool import GatttoolBackend
 import time
 from datetime import datetime
-from sqlalchemy import create_engine
 import sys
-import numpy as np
 import pandas as pd
 import json
-from sqlalchemy import create_engine
 import sqlite3
-
 
 class SensorFetcher(object):
     """Sensor fetching class. Iterate over sensor config and fetch data from miflora based sensors. Enriching data and creating json object to store it in database.
@@ -126,18 +122,10 @@ if __name__ == '__main__':
 
     """
     arguments = docopt(__doc__)
-    if '--database_name' in arguments and arguments['--database_name']:
-        database_name = arguments['--database_name']
-    else:
-        print ("sorry no database defined")
-        exit -1
-    if '--database_type' in arguments and arguments['--database_type'] == 'sqllite':
-        sensor_fetch = SensorFetcher(database_name)
-        if '--init' in arguments:
-            sensor_fetch.create_table()
-        sensor_data = sensor_fetch.get_sensor_data()
-        sensor_fetch.write_sensor_data_to_db(sensor_data)
-    else:
-        print ("sorry no config for this database defined")
-        exit -1
+    database_name = 'sensor_data'
+    sensor_fetch = SensorFetcher(database_name)
+    if '--init' in arguments:
+        sensor_fetch.create_table()
+    sensor_data = sensor_fetch.get_sensor_data()
+    sensor_fetch.write_sensor_data_to_db(sensor_data)
     print ("We gathered data of %d sensor" % len(sensor_data))
