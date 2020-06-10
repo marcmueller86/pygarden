@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-'''Fetch miflora bluettooth sensor data
-Usage:
-    sensor_fetcher.py [--init]
+'''Usage: sensor_fetcher.py [--init]
+
+Fetch miflora bluettooth sensor data
+
 Options:
     --init
 '''
