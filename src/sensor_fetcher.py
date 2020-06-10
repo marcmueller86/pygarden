@@ -125,7 +125,7 @@ if __name__ == '__main__':
     print (arguments)
     database_name = 'sensor_data'
     sensor_fetch = SensorFetcher(database_name)
-    if '--init' in arguments:
+    if '--init' in arguments and arguments['--init'] == True:
         sensor_fetch.create_table()
     sensor_data = sensor_fetch.get_sensor_data()
     sensor_fetch.write_sensor_data_to_db(sensor_data)
