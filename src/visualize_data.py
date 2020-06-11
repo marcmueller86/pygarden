@@ -30,7 +30,7 @@ class VisualizeData(object):
                 [{"type": "scatter"},
                 {"type": "scatter"}],
                 [{"type": "table","colspan": 2}, None]],
-                subplot_titles=("Temperatur","Licht", "Feuchtigkeit","Leitfähigkeit"),
+                subplot_titles=("Temperatur","Feuchtigkeit", "Licht","Leitfähigkeit"),
                 horizontal_spacing = 0.05
         )
         # Only a few colors, add more if you need more than 10 sensors
