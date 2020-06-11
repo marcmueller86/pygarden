@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-'''Usage: sensor_fetcher.py [--init] [--export]
+'''Usage: sensor_fetcher.py [--init] [--export] [--visualize]
 
 Fetch miflora bluettooth sensor data
 
 Options:
     --init
     --export
+    --visualize
 '''
 
 from docopt import docopt
@@ -18,6 +19,7 @@ import sys
 import pandas as pd
 import json
 import sqlite3
+import visualize_data
 
 class SensorFetcher(object):
     """Sensor fetching class. Iterate over sensor config and fetch data from miflora based sensors. Enriching data and creating json object to store it in database.
@@ -134,8 +136,11 @@ if __name__ == '__main__':
     sensor_fetch = SensorFetcher(database_name)
     if '--init' in arguments and arguments['--init'] == True:
         sensor_fetch.create_table()
-    if '--export' in arguments and arguments['--export'] == True:
+    elif '--export' in arguments and arguments['--export'] == True:
         sensor_fetch.export_sensor_data_to_csv()
+    elif '--visualize' in arguments and arguments['--visualize'] == True:
+        vd = visualize_data.VisualizeData()
+        vd.create_export()
     else:
         sensor_data = sensor_fetch.get_sensor_data()
         sensor_fetch.write_sensor_data_to_db(sensor_data)
