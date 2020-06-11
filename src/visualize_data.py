@@ -57,7 +57,7 @@ class VisualizeData(object):
     def create_scatter_trace(self, df, fig, y, name, row, col):
         fig.add_trace(
             go.Scatter(x=df['datetime'], y=df[y],name=name),
-            row=1, col=1
+            row=row, col=col
         )
         return fig
 
