@@ -22,3 +22,6 @@ change to output folder of pygarden
 You can dump the tabel to output as `data_sensor.csv`
 
 `/usr/bin/docker run -e TZ=Europe/Amsterdam --rm -it --privileged --network host -v /home/pi/workspace/pygarden/output/:/output/ pygarden "--export"`
+
+With `crontab -e` we add the following line for a 30 minutes interval export:
+`*/30 * * * * /usr/bin/docker run -e TZ=Europe/Amsterdam --rm --privileged --network host -v /home/pi/workspace/pygarden/output/:/output/ pygarden "--export"`
