@@ -44,7 +44,7 @@ class SensorFetcher(object):
         Args:
             database_name ([string]): name of the database
         """
-        self.conn = sqlite3.connect("../output/%s.db" % database_name)
+        self.conn = sqlite3.connect("output/%s.db" % database_name)
 
     def create_table(self):
         """If init we create an empty sql table
@@ -72,7 +72,7 @@ class SensorFetcher(object):
         Returns:
             [dict]: all sensors with mac addresses
         """
-        with open('../config/sensor_config.json') as json_file:
+        with open('config/sensor_config.json') as json_file:
             sensor_config = json.load(json_file)
         return sensor_config
 
