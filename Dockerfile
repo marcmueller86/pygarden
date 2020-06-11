@@ -4,7 +4,7 @@ FROM arm32v7/python:latest
 RUN pip install docopt bluepy miflora btlewrap==0.0.8 pandas
 
 RUN apt-get update
-RUN apt-get install blueman bluez bluez-obexd libbluetooth3:i386 -y
+RUN apt-get install bluez -y
 
 
 COPY config ./
