@@ -72,7 +72,7 @@ class SensorFetcher(object):
         Returns:
             [dict]: all sensors with mac addresses
         """
-        with open('config/sensor_config.json') as json_file:
+        with open('sensor_config.json') as json_file:
             sensor_config = json.load(json_file)
         return sensor_config
 
