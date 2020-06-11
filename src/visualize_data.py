@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.figure_factory as ff
 from datetime import datetime, timedelta
+import plotly
 
 class VisualizeData(object):
 
@@ -32,12 +33,15 @@ class VisualizeData(object):
                 subplot_titles=("Temperatur","Licht", "Feuchtigkeit","Leitfähigkeit"),
                 horizontal_spacing = 0.05
         )
-        for sensor in df_resampled['name'].unique():
+        # Only a few colors, add more if you need more than 10 sensors
+        cols = plotly.colors.DEFAULT_PLOTLY_COLORS
+
+        for i, sensor in enumerate(df_resampled['name'].unique()):
             df_sensor = df[df['name'] == sensor] 
-            fig = self.create_scatter_trace(df_sensor, fig, 'temperature', sensor, 1, 1)
-            fig = self.create_scatter_trace(df_sensor, fig, 'moisture', sensor, 1, 2)
-            fig = self.create_scatter_trace(df_sensor, fig, 'light', sensor, 2, 1)
-            fig = self.create_scatter_trace(df_sensor, fig, 'conductivity', sensor, 2, 2)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'temperature', sensor, 1, 1)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'moisture', sensor, 1, 2)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'light', sensor, 2, 1)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'conductivity', sensor, 2, 2)
 
         # fig.add_trace(
         #     go.Scatter(x=df['datetime'], y=df['battery'],name='Batterie Ladung'),
@@ -47,9 +51,9 @@ class VisualizeData(object):
         df = df.sort_values(by='datetime_rounded', ascending=False).head(5)
         fig.add_trace(
             go.Table(
-            header=dict(values=['Datum','Leitfähigkeit(us/cm)', 'Lichtstärke (Lux)', 'Feuchtigkeit (?%)', 'Temperatur (C°)', 'Batterie Ladung (%)'],
+            header=dict(values=['Sensor','Datum','Leitfähigkeit(us/cm)', 'Lichtstärke (Lux)', 'Feuchtigkeit (?%)', 'Temperatur (C°)', 'Batterie Ladung (%)'],
                         align='left'),
-            cells=dict(values=[df.datetime_rounded, df.conductivity.apply(lambda x: round(x, decimals)), df.light.apply(lambda x: round(x, decimals)), df.moisture, df.temperature.apply(lambda x: round(x, decimals)), df.battery],
+            cells=dict(values=[df.name, df.datetime_rounded, df.conductivity.apply(lambda x: round(x, decimals)), df.light.apply(lambda x: round(x, decimals)), df.moisture.apply(lambda x: round(x, decimals)), df.temperature.apply(lambda x: round(x, decimals)), df.battery],
                     align='left')),
                     row=3, col=1
         )
@@ -63,9 +67,9 @@ class VisualizeData(object):
         pio.write_html(fig, file='output/html/charts.html')
 
 
-    def create_scatter_trace(self, df, fig, y, name, row, col):
+    def create_scatter_trace(self, color, df, fig, y, name, row, col):
         fig.add_trace(
-            go.Scatter(x=df['datetime_rounded'], y=df[y],name=name),
+            go.Scatter(x=df['datetime_rounded'], y=df[y],name=name, line=dict(width=2, color=color)),
             row=row, col=col
         )
         return fig
