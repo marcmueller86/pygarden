@@ -8,6 +8,5 @@ RUN apt-get install bluez bluez-tools build-essential libbluetooth-dev  -y
 
 COPY config ./
 COPY src ./
-RUN hcitool lescan
 # Trigger Python script
 CMD ["python", "./sensor_fetcher.py"]
