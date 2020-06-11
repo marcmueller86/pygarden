@@ -2,7 +2,7 @@
 FROM arm32v7/python:latest
 
 RUN apt-get update
-RUN apt install bluez -y
+RUN apt-get install bluez -y
 # Copy the Python Script to blink LED
 RUN pip install docopt bluepy miflora btlewrap==0.0.8 pandas
 
