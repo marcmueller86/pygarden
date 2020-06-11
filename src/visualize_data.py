@@ -48,7 +48,7 @@ class VisualizeData(object):
         #     row=3, col=1
         # )
         decimals = 2
-        df = df.sort_values(by='datetime_rounded', ascending=False).head(5)
+        df = df.sort_values(by='datetime_rounded', ascending=False).head(10)
         fig.add_trace(
             go.Table(
             header=dict(values=['Sensor','Datum','Leitfähigkeit(us/cm)', 'Lichtstärke (Lux)', 'Feuchtigkeit (?%)', 'Temperatur (C°)', 'Batterie Ladung (%)'],
