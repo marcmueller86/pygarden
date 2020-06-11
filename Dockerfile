@@ -9,4 +9,4 @@ RUN apt-get install bluez bluez-tools build-essential libbluetooth-dev  -y
 COPY config ./
 COPY src ./
 # Trigger Python script
-CMD ["python", "./sensor_fetcher.py"]
+ENTRYPOINT ["python", "./sensor_fetcher.py"]

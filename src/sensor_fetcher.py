@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # encoding: utf-8
-'''Usage: sensor_fetcher.py [--init]
+'''Usage: sensor_fetcher.py [--init] [--export]
 
 Fetch miflora bluettooth sensor data
 
 Options:
     --init
+    --export
 '''
 
 from docopt import docopt
@@ -85,6 +86,12 @@ class SensorFetcher(object):
         df = pd.DataFrame(sensor_data)
         df.to_sql('sensor_data', self.conn, if_exists='append', index = False)
 
+    def export_sensor_data_to_csv(self):
+        """Dumping whole sqllite database to csv
+        """
+        df = pd.read_sql('SELECT * FROM sensor_data', self.conn)
+        df.to_csv('output/sensor_data.csv', index=False)
+
     def fetch_data(self, sensor, address, now_utc, now):
         """Fetching sensor data for a specific sensor
 
@@ -127,6 +134,9 @@ if __name__ == '__main__':
     sensor_fetch = SensorFetcher(database_name)
     if '--init' in arguments and arguments['--init'] == True:
         sensor_fetch.create_table()
-    sensor_data = sensor_fetch.get_sensor_data()
-    sensor_fetch.write_sensor_data_to_db(sensor_data)
+    if '--export' in arguments and arguments['--init'] == True:
+        sensor_fetch.export_sensor_data_to_csv()
+    else:
+        sensor_data = sensor_fetch.get_sensor_data()
+        sensor_fetch.write_sensor_data_to_db(sensor_data)
     # print ("We gathered data of %d sensor" % len(sensor_data))
