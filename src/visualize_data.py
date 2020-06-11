@@ -17,13 +17,14 @@ class VisualizeData(object):
         fig = make_subplots(
             rows=3, cols=2,
             shared_xaxes=True,
-            vertical_spacing=0.05,
+            vertical_spacing=0.15,
             specs=[[{"type": "scatter"},
                 {"type": "scatter"}],
                 [{"type": "scatter"},
                 {"type": "scatter"}],
                 [{"type": "table","colspan": 2}, None]],
-                subplot_titles=("Temperatur","Licht", "Feuchtigkeit","Leitfähigkeit", "Zusammenfassung")
+                subplot_titles=("Temperatur","Licht", "Feuchtigkeit","Leitfähigkeit", "Zusammenfassung"),
+                horizontal_spacing = 0.05
         )
 
         fig = self.create_scatter_trace(df, fig, 'temperature', 'Temperatur', 1, 1)
@@ -36,7 +37,7 @@ class VisualizeData(object):
         #     row=3, col=1
         # )
 
-        df = df.sort_values(by='datetime', ascending=False).head(5)
+        df = df.sort_values(by='datetime', ascending=False).head(3)
         fig.add_trace(
             go.Table(
             header=dict(values=list(df.columns),
