@@ -5,11 +5,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import plotly.figure_factory as ff
 
-
 class VisualizeData(object):
 
-    def create_export(self):
-        df = pd.read_csv('output/sensor_data.csv')
+    def create_export(self, file_name):
+        df = pd.read_csv(file_name)
 
         df['datetime'] = pd.to_datetime(df['date_iso'])
         df_sample = df[['datetime','name','temperature','light','battery','moisture','conductivity']].resample(rule='15Min', on='datetime').mean().dropna()
@@ -28,8 +27,8 @@ class VisualizeData(object):
         )
 
         fig = self.create_scatter_trace(df, fig, 'temperature', 'Temperatur', 1, 1)
-        fig = self.create_scatter_trace(df, fig, 'light', 'Licht', 1, 2)
-        fig = self.create_scatter_trace(df, fig, 'moisture', 'Feuchtigkeit', 2, 1)
+        fig = self.create_scatter_trace(df, fig, 'moisture', 'Feuchtigkeit', 1, 2)
+        fig = self.create_scatter_trace(df, fig, 'light', 'Licht', 2, 1)
         fig = self.create_scatter_trace(df, fig, 'conductivity', 'Leitfähigkeit', 2, 2)
 
         # fig.add_trace(
@@ -37,7 +36,7 @@ class VisualizeData(object):
         #     row=3, col=1
         # )
         decimals = 2
-        df = df.sort_values(by='datetime', ascending=False).head(10)
+        df = df.sort_values(by='datetime', ascending=False).head(5)
         fig.add_trace(
             go.Table(
             header=dict(values=['Datum','Leitfähigkeit(us/cm)', 'Lichtstärke (Lux)', 'Feuchtigkeit (%)', 'Temperatur (C°)', 'Batterie Ladung (%)'],
@@ -53,7 +52,8 @@ class VisualizeData(object):
         fig.update_layout(template='plotly_dark', showlegend=False)
         fig.update_layout(title='Messwerte Pflanzsensoren')
         #fig.show()
-        pio.write_html(fig, file='output/html/index.html')
+        pio.write_html(fig, file='output/html/charts.html')
+
 
     def create_scatter_trace(self, df, fig, y, name, row, col):
         fig.add_trace(
@@ -64,4 +64,4 @@ class VisualizeData(object):
 
 if __name__ == '__main__':
     vd = VisualizeData()
-    vd.create_export()
+    vd.create_export('output/sensor_data.csv')

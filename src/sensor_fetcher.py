@@ -140,7 +140,7 @@ if __name__ == '__main__':
         sensor_fetch.export_sensor_data_to_csv()
     elif '--visualize' in arguments and arguments['--visualize'] == True:
         vd = visualize_data.VisualizeData()
-        vd.create_export()
+        vd.create_export('output/sensor_data.csv')
     else:
         sensor_data = sensor_fetch.get_sensor_data()
         sensor_fetch.write_sensor_data_to_db(sensor_data)
