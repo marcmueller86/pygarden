@@ -134,7 +134,7 @@ if __name__ == '__main__':
     sensor_fetch = SensorFetcher(database_name)
     if '--init' in arguments and arguments['--init'] == True:
         sensor_fetch.create_table()
-    if '--export' in arguments and arguments['--init'] == True:
+    if '--export' in arguments and arguments['--export'] == True:
         sensor_fetch.export_sensor_data_to_csv()
     else:
         sensor_data = sensor_fetch.get_sensor_data()
