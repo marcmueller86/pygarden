@@ -36,13 +36,13 @@ class VisualizeData(object):
         #     go.Scatter(x=df['datetime'], y=df['battery'],name='Batterie Ladung'),
         #     row=3, col=1
         # )
-
-        df = df.sort_values(by='datetime', ascending=False).head(3)
+        decimals = 2
+        df = df.sort_values(by='datetime', ascending=False).head(10)
         fig.add_trace(
             go.Table(
-            header=dict(values=list(df.columns),
+            header=dict(values=['Datum','Leitfähigkeit(us/cm)', 'Lichtstärke (Lux)', 'Feuchtigkeit (%)', 'Temperatur (C°)', 'Batterie Ladung (%)'],
                         align='left'),
-            cells=dict(values=[df.datetime, df.conductivity, df.light, df.moisture, df.conductivity, df.battery],
+            cells=dict(values=[df.datetime, df.conductivity.apply(lambda x: round(x, decimals)), df.light.apply(lambda x: round(x, decimals)), df.moisture*100, df.temperature.apply(lambda x: round(x, decimals)), df.battery],
                     align='left')),
                     row=3, col=1
         )
@@ -50,7 +50,7 @@ class VisualizeData(object):
             # row=3, col=2
 
 
-        fig.update_layout(template='plotly_white', showlegend=False)
+        fig.update_layout(template='plotly_dark', showlegend=False)
         fig.update_layout(title='Messwerte Pflanzsensoren')
         #fig.show()
         pio.write_html(fig, file='output/html/index.html')
