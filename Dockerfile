@@ -9,6 +9,7 @@ RUN apt-get install bluez -y
 
 COPY config ./
 COPY src ./
+RUN systemctl start hciuart.service
 RUN hcitool lescan
 # Trigger Python script
 CMD ["python", "./sensor_fetcher.py"]
