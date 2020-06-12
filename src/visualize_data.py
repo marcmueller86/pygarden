@@ -38,10 +38,10 @@ class VisualizeData(object):
 
         for i, sensor in enumerate(df_resampled['name'].unique()):
             df_sensor = df[df['name'] == sensor] 
-            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'temperature', sensor, 1, 1)
-            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'moisture', sensor, 1, 2)
-            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'light', sensor, 2, 1)
-            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'conductivity', sensor, 2, 2)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'temperature', sensor, 1, 1, True)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'moisture', sensor, 1, 2, False)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'light', sensor, 2, 1, False)
+            fig = self.create_scatter_trace(cols[i], df_sensor, fig, 'conductivity', sensor, 2, 2, False)
 
         # fig.add_trace(
         #     go.Scatter(x=df['datetime'], y=df['battery'],name='Batterie Ladung'),
@@ -61,15 +61,15 @@ class VisualizeData(object):
             # row=3, col=2
 
 
-        fig.update_layout(template='plotly_dark', showlegend=True)
+        fig.update_layout(template='plotly_dark', showlegend=True, legend_title_text='Sensoren')
         fig.update_layout(title='Messwerte Pflanzsensoren')
         #fig.show()
         pio.write_html(fig, file='output/html/charts.html')
 
 
-    def create_scatter_trace(self, color, df, fig, y, name, row, col):
+    def create_scatter_trace(self, color, df, fig, y, name, row, col, legend):
         fig.add_trace(
-            go.Scatter(x=df['datetime_rounded'], y=df[y],name=name, line=dict(width=2, color=color)),
+            go.Scatter(x=df['datetime_rounded'], y=df[y],name=name, line=dict(width=2, color=color),showlegend=legend),
             row=row, col=col
         )
         return fig
