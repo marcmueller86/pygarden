@@ -61,7 +61,7 @@ class VisualizeData(object):
             # row=3, col=2
 
 
-        fig.update_layout(template='plotly_dark', showlegend=False)
+        fig.update_layout(template='plotly_dark', showlegend=True)
         fig.update_layout(title='Messwerte Pflanzsensoren')
         #fig.show()
         pio.write_html(fig, file='output/html/charts.html')
