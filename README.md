@@ -56,7 +56,8 @@ To access the renderd graph, you can use the lightweight http server ```
 
 install it via `sudp apt-get install lighthttpd`
 
-Then add at `server.document-root = "/home/pi/workspace/pygarden/output/html/"`
+Go to lighthttpd.conf and add at `server.document-root = "/home/pi/workspace/pygarden/output/html/"`
+
 Then restart lighthttpd `sudo service lighthttpd force-reload`
 
 
