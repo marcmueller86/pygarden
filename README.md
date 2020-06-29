@@ -1,7 +1,7 @@
 # pygarden
 Clone the repo and build the docker `docker build -t pygarden .`. 
 
-Afterwards start the container with : `docker run -e TZ=Europe/Amsterdam --rm -it --privileged --network host -v /home/pi/workspace/pygarden/output/:/output/ pygarden`
+Afterwards start the container with : `docker run -e TZ=Europe/Amsterdam --rm -it --privileged --network host -v /home/pi/workspace/pygarden/output/:/output/ pygarden "--init"`
 
 Images is built on raspberry pi with arm32v7 as base. 
 
@@ -31,3 +31,10 @@ To visulize data simply call :
 `docker run -e TZ=Europe/Amsterdam --rm -it --privileged --network host -v /home/pi/workspace/pygarden/output/:/output/ pygarden "--visualize"`
 
 You will find an rendered graph in `output/html/index.html`
+
+To access the renderd graph, you can use the lightweight http server ```
+
+install it via `sudp apt-get install lighthttpd`
+
+Then add at `server.document-root = "/home/pi/workspace/pygarden/output/html/"`
+Then restart lighthttpd `sudo service lighthttpd force-reload`
