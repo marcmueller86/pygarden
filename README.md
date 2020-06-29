@@ -2,7 +2,7 @@
 
 * Raspberry Pi 4
 * mi flower sensor
-    * Royal Gardineer works for me just  [search on amazon](https://www.amazon.de/Royal-Gardineer-Gie%C3%9Fanzeiger-4in1-Pflanzensensor-Feuchtigkeitsmesser/dp/B0746XKCGC/ref=sr_1_1?adgrpid=70276114519&dchild=1&gclid=Cj0KCQjwoub3BRC6ARIsABGhnyZDclxpqaf42ijxEPYca8ZViZO-RNQ9j0zm4tqhJLb-F_SxF_eV5m4aAh_gEALw_wcB&hvadid=353097392621&hvdev=c&hvlocphy=9060657&hvnetw=g&hvqmt=e&hvrand=6116598565721446160&hvtargid=kwd-754141135158&hydadcr=28018_1723953&keywords=mi+flora+sensor&qid=1593447668&sr=8-1&tag=googhydr08-21) on pearl you find the cheapest one. The most important thing is that they are based on Xiaomi Flower. 
+    * Royal Gardineer works for me just  [search on amazon](https://www.amazon.de/Royal-Gardineer-Gie%C3%9Fanzeiger-4in1-Pflanzensensor-Feuchtigkeitsmesser/dp/B0746XKCGC/ref=sr_1_1?adgrpid=70276114519&dchild=1&gclid=Cj0KCQjwoub3BRC6ARIsABGhnyZDclxpqaf42ijxEPYca8ZViZO-RNQ9j0zm4tqhJLb-F_SxF_eV5m4aAh_gEALw_wcB&hvadid=353097392621&hvdev=c&hvlocphy=9060657&hvnetw=g&hvqmt=e&hvrand=6116598565721446160&hvtargid=kwd-754141135158&hydadcr=28018_1723953&keywords=mi+flora+sensor&qid=1593447668&sr=8-1&tag=googhydr08-21) on pearl you find the cheapest one. The most important thing is that they are based on Xiaomi Flower. µ
 
 # copy raspberry image to sd card
 
@@ -58,3 +58,6 @@ install it via `sudp apt-get install lighthttpd`
 
 Then add at `server.document-root = "/home/pi/workspace/pygarden/output/html/"`
 Then restart lighthttpd `sudo service lighthttpd force-reload`
+
+
+![Sensor HTML Example](https://github.com/marcmueller86/pygarden/blob/master/doc/sensors_html.png?raw=true)
